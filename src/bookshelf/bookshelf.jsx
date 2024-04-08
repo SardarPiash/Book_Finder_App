@@ -68,6 +68,30 @@ const bookList = [
     star: "4.5 star",
     isFavourite: false,
   },
+  {
+    id: crypto.randomUUID(),
+    bookName: "L React Native Cookbook",
+    writer: "Daniele De Nobili",
+    price: "$50",
+    star: "5 star",
+    isFavourite: true,
+  },
+  {
+    id: crypto.randomUUID(),
+    bookName: "C Software Craftsmanship",
+    writer: "Robert C. Martin",
+    price: "$40",
+    star: "5 star",
+    isFavourite: true,
+  },
+  {
+    id: crypto.randomUUID(),
+    bookName: "D Object-Oriented Software",
+    writer: "Erich Gamma",
+    price: "$55",
+    star: "4.5 star",
+    isFavourite: false,
+  }
 ];
 
 export default function Bookshelf() {
