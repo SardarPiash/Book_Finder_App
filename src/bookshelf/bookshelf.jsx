@@ -2,6 +2,8 @@ import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import bookPhoto from "../assets/book.png";
 import Star from "../assets/star.svg";
+import Search from "./search";
+import Sortmenu from "./sortmenu";
 
 const bookList = [
   {
@@ -97,6 +99,8 @@ const bookList = [
 export default function Bookshelf() {
   const [bookLists, setBookList] = useState(bookList);
 
+
+  ////Favourite button toggle.......
   function handleIsFavouraite(bookID){
     const index = bookLists.findIndex(book=> book.id === bookID)
 
@@ -107,8 +111,31 @@ export default function Bookshelf() {
     setBookList(newArray)
   }
 
+  ///searching feature.............
+function handleSearch(searchText){
+const searchBookName= bookLists.filter(book=>{
+  return book.bookName.toLowerCase().includes(searchText.toLowerCase())
+})
+setBookList(searchBookName);
+}
+
   return (
     <div>
+      <div className="mb-6 ml-20 mr-20 mx-auto flex items-end justify-between max-md:max-w-[95%] max-md:flex-col max-md:items-start max-md:space-y-4">
+            {/* info , title , search */}
+            <div>
+              <h6 className="mb-2 text-base lg:text-3xl">Trending on 2021</h6>
+              <h2 className="mb-6 font-['Playfair_Display'] text-3xl font-bold lg:text-4xl">
+                Trending Books of the Year
+              </h2>
+                  <Search onSearch={handleSearch}/>
+            </div>
+            {/* sort - filter */}
+            <div className="flex items-stretch space-x-3">
+              {/* Sort */}
+              <Sortmenu />
+            </div>
+          </div>
       <div className="ml-20 mr-20 flex flex-wrap items-end justify-around max-w-10xl">
         {bookLists.map((book) => (
           <div className="mb-10 space-y-3" key={book.id}>
