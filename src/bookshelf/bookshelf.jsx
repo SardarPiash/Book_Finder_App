@@ -85,9 +85,9 @@ export default function Bookshelf() {
 
   return (
     <div>
-      <div className="mt-16 container mx-auto grid grid-cols-1 gap-8 max-w-7xl md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="ml-20 mr-20 flex flex-wrap items-end justify-around max-w-10xl">
         {bookLists.map((book) => (
-          <div className="space-y-3" key={book.id}>
+          <div className="mb-10 space-y-3" key={book.id}>
             <div className="flex items-center justify-center rounded-md border border-[#324251]/30 bg-white p-4">
               <img className="max-w-[144px]" src={bookPhoto} alt="book name" />
             </div>
