@@ -26,7 +26,7 @@ cd Book_Finder_App
 - Tailwind CSS
 
 ### Live Demo
-Check out the live demo [here](https://book-finder-app-chi-one.vercel.app/).
+Check out the live demo [here](https://book-finder-app-smoky-nine.vercel.app/).
 
 
 
