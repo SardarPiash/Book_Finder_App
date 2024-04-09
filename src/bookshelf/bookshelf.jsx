@@ -93,49 +93,83 @@ const bookList = [
     price: "$55",
     star: "4.5 star",
     isFavourite: false,
-  }
+  },
 ];
 
 export default function Bookshelf() {
   const [bookLists, setBookList] = useState(bookList);
 
-
   ////Favourite button toggle.......
-  function handleIsFavouraite(bookID){
-    const index = bookLists.findIndex(book=> book.id === bookID)
+  function handleIsFavouraite(bookID) {
+    const index = bookLists.findIndex((book) => book.id === bookID);
 
-    const newArray = [...bookLists]
+    const newArray = [...bookLists];
 
-    newArray[index].isFavourite = !newArray[index].isFavourite
+    newArray[index].isFavourite = !newArray[index].isFavourite;
 
-    setBookList(newArray)
+    setBookList(newArray);
   }
 
   ///searching feature.............
-function handleSearch(searchText){
-const searchBookName= bookLists.filter(book=>{
-  return book.bookName.toLowerCase().includes(searchText.toLowerCase())
-})
-setBookList(searchBookName);
-}
+  function handleSearch(searchText) {
+    const searchBookName = bookLists.filter((book) => {
+      return book.bookName.toLowerCase().includes(searchText.toLowerCase());
+    });
+    setBookList(searchBookName);
+  }
+
+  function handleSorting(text) {
+    if (text === "name_asc") {
+      const sortingArray = [...bookLists].sort((a, b) => {
+        const A = a.bookName.toLowerCase();
+        const B = b.bookName.toLowerCase();
+
+        if (A < B) {
+          return -1;
+        } else if (A > B) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      setBookList(sortingArray);
+    } else if (text === "name_desc") {
+      const sortingArray = [...bookLists].sort((a, b) => {
+        const A = a.bookName.toLowerCase();
+        const B = b.bookName.toLowerCase();
+
+        if (A < B) {
+          return 1;
+        } else if (A > B) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+      setBookList(sortingArray);
+    } else {
+      setBookList(bookLists);
+    }
+    console.log(text);
+  }
 
   return (
     <div>
       <div className="mb-6 ml-20 mr-20 mx-auto flex items-end justify-between max-md:max-w-[95%] max-md:flex-col max-md:items-start max-md:space-y-4">
-            {/* info , title , search */}
-            <div>
-              <h6 className="mb-2 text-base lg:text-3xl">Trending on 2021</h6>
-              <h2 className="mb-6 font-['Playfair_Display'] text-3xl font-bold lg:text-4xl">
-                Trending Books of the Year
-              </h2>
-                  <Search onSearch={handleSearch}/>
-            </div>
-            {/* sort - filter */}
-            <div className="flex items-stretch space-x-3">
-              {/* Sort */}
-              <Sortmenu />
-            </div>
-          </div>
+        {/* info , title , search */}
+        <div>
+          <h6 className="mb-2 text-base lg:text-3xl">Trending on 2021</h6>
+          <h2 className="mb-6 font-['Playfair_Display'] text-3xl font-bold lg:text-4xl">
+            Trending Books of the Year
+          </h2>
+          <Search onSearch={handleSearch} />
+        </div>
+        {/* sort - filter */}
+        <div className="flex items-stretch space-x-3">
+          {/* Sort */}
+          <Sortmenu onSorting={handleSorting} />
+        </div>
+      </div>
       <div className="ml-20 mr-20 flex flex-wrap items-end justify-around max-w-10xl">
         {bookLists.map((book) => (
           <div className="mb-10 space-y-3" key={book.id}>
@@ -180,8 +214,9 @@ setBookList(searchBookName);
                   Add to Cart
                 </button>
                 {book.isFavourite ? (
-                  <button className="flex min-w-[132px] items-center justify-center gap-1 rounded-md bg-red-200 py-1.5 text-[#1C4336] transition-all hover:bg-[#1C4336]/[24%] lg:py-1.5"
-                  onClick={()=>handleIsFavouraite(book.id)}
+                  <button
+                    className="flex min-w-[132px] items-center justify-center gap-1 rounded-md bg-red-200 py-1.5 text-[#1C4336] transition-all hover:bg-[#1C4336]/[24%] lg:py-1.5"
+                    onClick={() => handleIsFavouraite(book.id)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -200,8 +235,9 @@ setBookList(searchBookName);
                     Favourite
                   </button>
                 ) : (
-                  <button className="flex min-w-[132px] items-center justify-center gap-1 rounded-md bg-[#1C4336]/[14%] py-1.5 text-[#1C4336] transition-all hover:bg-[#1C4336]/[24%] lg:py-1.5"
-                  onClick={()=>handleIsFavouraite(book.id)}
+                  <button
+                    className="flex min-w-[132px] items-center justify-center gap-1 rounded-md bg-[#1C4336]/[14%] py-1.5 text-[#1C4336] transition-all hover:bg-[#1C4336]/[24%] lg:py-1.5"
+                    onClick={() => handleIsFavouraite(book.id)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
